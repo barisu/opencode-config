@@ -15,10 +15,11 @@ permission:
     "git diff*": allow
     "git log*": allow
     "git show*": allow
+    "git show *env*": deny
+    "git diff *env*": deny
+    "ls": allow
     "ls *": allow
-    "cat *": allow
-    "rg *": allow
-    "grep *": allow
+    "find": allow
     "find *": allow
   websearch: allow
   webfetch: allow

@@ -45,15 +45,16 @@
 			"permission": {
 				"edit": "deny",
 				"bash": {
-					"*": "ask",
+					"*": "deny",
 					"git status*": "allow",
 					"git diff*": "allow",
 					"git log*": "allow",
 					"git show*": "allow",
+					"git show *env*": "deny",
+					"git diff *env*": "deny",
+					"ls": "allow",
 					"ls *": "allow",
-					"cat *": "allow",
-					"rg *": "allow",
-					"grep *": "allow",
+					"find": "allow",
 					"find *": "allow"
 				},
 				"task": {
@@ -69,13 +70,22 @@
 			}
 		},
 		"general": {
-			"model": "llama.cpp/qwen3.6-27b-mtp"
+			"model": "llama.cpp/qwen3.6-27b-mtp",
+			"permission": {
+				"read": "allow"
+			}
 		},
 		"explore": {
-			"model": "llama.cpp/qwen3.6-27b-mtp"
+			"model": "llama.cpp/qwen3.6-27b-mtp",
+			"permission": {
+				"read": "allow"
+			}
 		},
 		"scout": {
-			"model": "llama.cpp/qwen3.6-27b-mtp"
+			"model": "llama.cpp/qwen3.6-27b-mtp",
+			"permission": {
+				"read": "allow"
+			}
 		},
 		"compaction": {
 			"model": "llama.cpp/qwen3.6-27b-mtp"
@@ -87,4 +97,10 @@
 			"model": "llama.cpp/qwen3.6-27b-mtp"
 		}
 	},
+
+	// ---- Instructions ------------------------------------------------------
+	// .env の生値をクラウドに流出させない規約（local エージェント向け）.
+	"instructions": [
+		"instructions/env-hygiene.md"
+	],
 }

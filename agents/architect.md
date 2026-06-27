@@ -11,15 +11,16 @@ temperature: 0.2
 permission:
   edit: deny
   bash:
-    "*": ask
+    "*": deny
     "git status*": allow
     "git diff*": allow
     "git log*": allow
     "git show*": allow
+    "git show *env*": deny
+    "git diff *env*": deny
+    "ls": allow
     "ls *": allow
-    "cat *": allow
-    "rg *": allow
-    "grep *": allow
+    "find": allow
     "find *": allow
   websearch: allow
   webfetch: allow
@@ -86,7 +87,7 @@ Your returned brief MUST contain these sections, in order:
 ## Rules
 
 - Never write or patch files. You are read-only.
-- You may run read-only shell (`git diff`, `rg`, `ls`, `cat`, ...).
+- You may run read-only shell (`git diff`, `git show`, `git log`, `ls`, `find`, ...).
 - You may delegate deep dependency investigation to `@scout` only.
   Do not invoke other subagents.
 - When the question is purely "where is X located?", defer to `@explore`.
