@@ -5,7 +5,7 @@ description: Code reviewer subagent that audits build's implementation against
   (or after a fix cycle). Read-only; emits a structured review the build
   agent acts on. Use ONLY for reviewing completed work, not for planning.
 mode: subagent
-model: opencode-go/glm-5.2
+model: opencode-go/kimi-k2-7-code
 temperature: 0.2
 steps: 25
 permission:

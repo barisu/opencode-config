@@ -2,8 +2,8 @@
 	"$schema": "https://opencode.ai/config.json",
 
 	// ---- Models & routing -------------------------------------------------
-	// 既定は GLM 5.2 (深思考). small/title/summary 等の雑務は local Qwen.
-	"model": "opencode-go/glm-5.2",
+	// 既定は Kimi K2.7 Code (深思考). small/title/summary 等の雑務は local Qwen.
+	"model": "opencode-go/kimi-k2-7-code",
 	"small_model": "llama.cpp/qwen3.6-27b-mtp",
 	// 会話開始時は思考系(plan)から入る.
 	"default_agent": "plan",
@@ -44,11 +44,11 @@
 	},
 
 	// ---- Agents ------------------------------------------------------------
-	// 思考系 = GLM 5.2, 実装系 = local Qwen3.6-27B-MTP (確認付き).
+	// 思考系 = Kimi K2.7 Code, 実装系 = local Qwen3.6-27B-MTP (確認付き).
 	// prompt は build.md / plan.md 等のファイルで上書きすることも可能.
 	"agent": {
 		"plan": {
-			"model": "opencode-go/glm-5.2",
+			"model": "opencode-go/kimi-k2-7-code",
 			"permission": {
 				"edit": "deny",
 				"bash": {
