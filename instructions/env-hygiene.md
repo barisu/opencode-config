@@ -31,3 +31,24 @@ Your output becomes the input context of calling (parent) agents. A cloud-based
 parent agent receives everything you return — secrets in your return value
 will be transmitted to the cloud provider. Permission rules block direct
 `.env` reads on cloud agents, but this indirect path would bypass them.
+
+## GitHub CLI (`gh`) usage
+
+When you need to interact with GitHub (repositories, issues, pull requests,
+etc.), use the `gh` CLI tool via bash. The CLI is already authenticated.
+
+**Rules:**
+
+- `gh` commands use a **whitelist** — only explicitly allowed read-only
+  operations are permitted. All other `gh` commands are denied.
+- Allowed read-only commands:
+  - `gh repo view`, `gh issue view`, `gh issue list`
+  - `gh pr view`, `gh pr list`, `gh pr diff`
+  - `gh search`
+  - `gh release list`, `gh release view`
+  - `gh run list`, `gh run view`
+  - `gh workflow list`, `gh workflow view`
+- **Never** use `gh auth` commands (authentication is managed externally).
+- **Never** use write/delete operations via `gh` (blocked by whitelist
+  permission rules).
+- Do **not** assume `gh api` is available (it is blocked).

@@ -3,7 +3,7 @@
 
 	// ---- Models & routing -------------------------------------------------
 	// 既定は Kimi K2.7 Code (深思考). small/title/summary 等の雑務は local Qwen.
-	"model": "opencode-go/kimi-k2-7-code",
+	"model": "opencode-go/kimi-k2.7-code",
 	"small_model": "llama.cpp/qwen3.6-27b-mtp",
 	// 会話開始時は思考系(plan)から入る.
 	"default_agent": "plan",
@@ -14,13 +14,6 @@
 			"command": [
 				"tavily-mcp"
 			]
-		},
-		"github": {
-			"type": "remote",
-			"url": "https://api.githubcopilot.com/mcp/",
-			"headers": {
-				"Authorization": "Bearer {env:GITHUB_PERSONAL_ACCESS_TOKEN}"
-			}
 		}
 	},
 
@@ -48,11 +41,25 @@
 	// prompt は build.md / plan.md 等のファイルで上書きすることも可能.
 	"agent": {
 		"plan": {
-			"model": "opencode-go/kimi-k2-7-code",
+			"model": "opencode-go/kimi-k2.7-code",
 			"permission": {
 				"edit": "deny",
 				"bash": {
 					"*": "deny",
+					"gh repo view*": "allow",
+					"gh issue view*": "allow",
+					"gh issue list*": "allow",
+					"gh pr view*": "allow",
+					"gh pr list*": "allow",
+					"gh pr diff*": "allow",
+					"gh search*": "allow",
+					"gh release list*": "allow",
+					"gh release view*": "allow",
+					"gh run list*": "allow",
+					"gh run view*": "allow",
+					"gh workflow list*": "allow",
+					"gh workflow view*": "allow",
+					"gh *": "deny",
 					"git status*": "allow",
 					"git diff*": "allow",
 					"git log*": "allow",
@@ -73,25 +80,92 @@
 			"model": "llama.cpp/qwen3.6-27b-mtp",
 			"permission": {
 				"edit": "allow",
-				"bash": "ask"
+				"bash": {
+					"*": "ask",
+					"gh repo view*": "allow",
+					"gh issue view*": "allow",
+					"gh issue list*": "allow",
+					"gh pr view*": "allow",
+					"gh pr list*": "allow",
+					"gh pr diff*": "allow",
+					"gh search*": "allow",
+					"gh release list*": "allow",
+					"gh release view*": "allow",
+					"gh run list*": "allow",
+					"gh run view*": "allow",
+					"gh workflow list*": "allow",
+					"gh workflow view*": "allow",
+					"gh *": "deny"
+				}
 			}
 		},
 		"general": {
 			"model": "llama.cpp/qwen3.6-27b-mtp",
 			"permission": {
-				"read": "allow"
+				"read": "allow",
+				"bash": {
+					"*": "deny",
+					"gh repo view*": "allow",
+					"gh issue view*": "allow",
+					"gh issue list*": "allow",
+					"gh pr view*": "allow",
+					"gh pr list*": "allow",
+					"gh pr diff*": "allow",
+					"gh search*": "allow",
+					"gh release list*": "allow",
+					"gh release view*": "allow",
+					"gh run list*": "allow",
+					"gh run view*": "allow",
+					"gh workflow list*": "allow",
+					"gh workflow view*": "allow",
+					"gh *": "deny"
+				}
 			}
 		},
 		"explore": {
 			"model": "llama.cpp/qwen3.6-27b-mtp",
 			"permission": {
-				"read": "allow"
+				"read": "allow",
+				"bash": {
+					"*": "deny",
+					"gh repo view*": "allow",
+					"gh issue view*": "allow",
+					"gh issue list*": "allow",
+					"gh pr view*": "allow",
+					"gh pr list*": "allow",
+					"gh pr diff*": "allow",
+					"gh search*": "allow",
+					"gh release list*": "allow",
+					"gh release view*": "allow",
+					"gh run list*": "allow",
+					"gh run view*": "allow",
+					"gh workflow list*": "allow",
+					"gh workflow view*": "allow",
+					"gh *": "deny"
+				}
 			}
 		},
 		"scout": {
 			"model": "llama.cpp/qwen3.6-27b-mtp",
 			"permission": {
-				"read": "allow"
+				"read": "allow",
+				"bash": {
+					"*": "deny",
+					"gh repo view*": "allow",
+					"gh issue view*": "allow",
+					"gh issue list*": "allow",
+					"gh pr view*": "allow",
+					"gh pr list*": "allow",
+					"gh pr diff*": "allow",
+					"gh search*": "allow",
+					"gh release list*": "allow",
+					"gh release view*": "allow",
+					"gh run list*": "allow",
+					"gh run view*": "allow",
+					"gh workflow list*": "allow",
+					"gh workflow view*": "allow",
+					"gh *": "deny"
+				}
 			}
 		},
 		"compaction": {

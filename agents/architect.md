@@ -6,7 +6,7 @@ description: Deep architecture & design reasoning subagent. Use ONLY when the
   via Task tool from the build/plan agents. Read-only; may delegate
   deep research to @scout.
 mode: subagent
-model: opencode-go/kimi-k2-7-code
+model: opencode-go/kimi-k2.7-code
 temperature: 0.2
 permission:
   edit: deny
