@@ -55,13 +55,16 @@
 					"rg *": "allow",
 					"grep *": "allow",
 					"find *": "allow"
+				},
+				"task": {
+					"*": "allow"
 				}
 			}
 		},
 		"build": {
 			"model": "llama.cpp/qwen3.6-27b-mtp",
 			"permission": {
-				"edit": "ask",
+				"edit": "allow",
 				"bash": "ask"
 			}
 		},

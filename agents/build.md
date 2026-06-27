@@ -1,6 +1,6 @@
 ---
 description: Implementation agent that executes a plan with full tool access.
-mode: primary
+mode: all
 model: llama.cpp/qwen3.6-27b-mtp
 temperature: 0.3
 permission:
