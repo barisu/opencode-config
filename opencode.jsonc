@@ -1,0 +1,87 @@
+{
+	"$schema": "https://opencode.ai/config.json",
+
+	// ---- Models & routing -------------------------------------------------
+	// 既定は GLM 5.2 (深思考). small/title/summary 等の雑務は local Qwen.
+	"model": "opencode-go/glm-5.2",
+	"small_model": "llama.cpp/qwen3.6-27b-mtp",
+	// 会話開始時は思考系(plan)から入る.
+	"default_agent": "plan",
+
+	"mcp": {
+		"tavily": {
+			"type": "local",
+			"command": [
+				"tavily-mcp"
+			]
+		}
+	},
+
+	"provider": {
+		"llama.cpp": {
+			"npm": "@ai-sdk/openai-compatible",
+			"name": "llama-server (local)",
+			"options": {
+				"baseURL": "{env:OPENCODE_LLAMA_BASEURL}"
+			},
+			"models": {
+				"qwen3.6-27b-mtp": {
+					"name": "Qwen3.6-27B-MTP (local)",
+					"limit": {
+						"context": 196800,
+						"output": 4096
+					}
+				}
+			}
+		}
+	},
+
+	// ---- Agents ------------------------------------------------------------
+	// 思考系 = GLM 5.2, 実装系 = local Qwen3.6-27B-MTP (確認付き).
+	// prompt は build.md / plan.md 等のファイルで上書きすることも可能.
+	"agent": {
+		"plan": {
+			"model": "opencode-go/glm-5.2",
+			"permission": {
+				"edit": "deny",
+				"bash": {
+					"*": "ask",
+					"git status*": "allow",
+					"git diff*": "allow",
+					"git log*": "allow",
+					"git show*": "allow",
+					"ls *": "allow",
+					"cat *": "allow",
+					"rg *": "allow",
+					"grep *": "allow",
+					"find *": "allow"
+				}
+			}
+		},
+		"build": {
+			"model": "llama.cpp/qwen3.6-27b-mtp",
+			"permission": {
+				"edit": "ask",
+				"bash": "ask"
+			}
+		},
+		"general": {
+			"model": "llama.cpp/qwen3.6-27b-mtp"
+		},
+		"explore": {
+			"model": "llama.cpp/qwen3.6-27b-mtp"
+		},
+		"scout": {
+			"model": "llama.cpp/qwen3.6-27b-mtp"
+		},
+		"compaction": {
+			"model": "llama.cpp/qwen3.6-27b-mtp"
+		},
+		"title": {
+			"model": "llama.cpp/qwen3.6-27b-mtp"
+		},
+		"summary": {
+			"model": "llama.cpp/qwen3.6-27b-mtp"
+		}
+	},
+}
