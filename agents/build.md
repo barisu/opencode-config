@@ -8,6 +8,7 @@ permission:
   edit: allow
   read: "allow"
   bash:
+    "gh *": deny
     "*": ask
     "git status*": "allow"
     "git diff*": "allow"
@@ -29,6 +30,19 @@ permission:
     "go vet*": "allow"
     "npm test*": "allow"
     "pytest*": "allow"
+    "gh repo view*": "allow"
+    "gh issue view*": "allow"
+    "gh issue list*": "allow"
+    "gh pr view*": "allow"
+    "gh pr list*": "allow"
+    "gh pr diff*": "allow"
+    "gh search*": "allow"
+    "gh release list*": "allow"
+    "gh release view*": "allow"
+    "gh run list*": "allow"
+    "gh run view*": "allow"
+    "gh workflow list*": "allow"
+    "gh workflow view*": "allow"
   task:
     "*": "allow"
 ---
@@ -95,8 +109,6 @@ Do not declare completion, hand off to the user, or commit on a
 
 - `@explore` — when you need to locate code and understand existing patterns.
   Prefer this over ad-hoc `rg` chains.
-- `@scout` — when you need to cross-reference upstream library / dependency
-  source.
 - `@general` — for parallel multi-step work you want to offload.
 
 ## Verification (mandatory before calling @reviewer)
