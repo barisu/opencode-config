@@ -36,6 +36,53 @@
 		}
 	},
 
+	// ---- Permission (top-level default) ------------------------------------
+	// .env files are blocked everywhere except .env.example.
+	"permission": {
+		"read": {
+			"": "allow",
+			".env": "deny",
+			".env.": "deny",
+			".env.example": "allow"
+		},
+		"glob": {
+			"": "allow",
+			"**/.env": "deny",
+			"**/.env.*": "deny",
+			"**/.env.example": "allow"
+		},
+		"grep": {
+			"": "allow",
+			"**/.env": "deny",
+			"**/.env.*": "deny",
+			"**/.env.example": "allow"
+		},
+		"list": {
+			"": "allow",
+			"**/.env*": "deny",
+			"**/.env.example": "allow"
+		},
+		"external_directory": {
+			"": "ask",
+			"**/.env": "deny",
+			"**/.env.*": "deny",
+			"**/.env.example": "allow"
+		},
+		"bash": {
+			"": "ask",
+			"cat *env*": "deny",
+			"cat .env*": "deny",
+			"cat *.env*": "deny",
+			"cat */.env*": "deny",
+			"cat * .env*": "deny",
+			"less .env*": "deny",
+			"head .env*": "deny",
+			"tail .env*": "deny",
+			"source .env*": "deny",
+			". .env*": "deny"
+		}
+	},
+
 	// ---- Agents ------------------------------------------------------------
 	// 思考系 = Kimi K2.7 Code, 実装系 = local Qwen3.6-27B-MTP (確認付き).
 	// prompt は build.md / plan.md 等のファイルで上書きすることも可能.
@@ -85,7 +132,12 @@
 		"general": {
 			"model": "llama.cpp/qwen3.6-27b-mtp",
 			"permission": {
-				"read": "allow",
+				"read": {
+					"": "allow",
+					".env": "deny",
+					".env.": "deny",
+					".env.example": "allow"
+				},
 				"bash": {
 					"*": "deny",
 					"gh *": "deny",
@@ -108,7 +160,12 @@
 		"explore": {
 			"model": "llama.cpp/qwen3.6-27b-mtp",
 			"permission": {
-				"read": "allow",
+				"read": {
+					"": "allow",
+					".env": "deny",
+					".env.": "deny",
+					".env.example": "allow"
+				},
 				"bash": {
 					"*": "deny",
 					"gh *": "deny",

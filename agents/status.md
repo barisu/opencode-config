@@ -8,7 +8,11 @@ model: llama.cpp/qwen3.6-27b-mtp
 temperature: 0
 steps: 10
 permission:
-  read: allow
+  read:
+    "": allow
+    ".env": deny
+    ".env.": deny
+    ".env.example": allow
   edit: deny
   task:
     "*": deny
@@ -26,10 +30,16 @@ permission:
     "ls *": allow
     "cat *": allow
     "cat *env*": deny
+    "cat .env*": deny
     "rg *": allow
     "grep *": allow
     "find": allow
     "find *": allow
+    "less .env*": deny
+    "head .env*": deny
+    "tail .env*": deny
+    "source .env*": deny
+    ". .env*": deny
 ---
 
 You are the **status agent**. Your only job is to give the user a fast, concise

@@ -6,7 +6,11 @@ temperature: 0.3
 steps: 80
 permission:
   edit: allow
-  read: "allow"
+  read:
+    "": allow
+    ".env": deny
+    ".env.": deny
+    ".env.example": allow
   bash:
     "gh *": deny
     "*": ask
@@ -15,6 +19,10 @@ permission:
     "git log*": "allow"
     "ls *": "allow"
     "cat *": "allow"
+    "cat .env*": deny
+    "cat *.env*": deny
+    "cat */.env*": deny
+    "cat * .env*": deny
     "rg *": "allow"
     "grep *": "allow"
     "find *": "allow"
@@ -43,6 +51,11 @@ permission:
     "gh run view*": "allow"
     "gh workflow list*": "allow"
     "gh workflow view*": "allow"
+    "less .env*": deny
+    "head .env*": deny
+    "tail .env*": deny
+    "source .env*": deny
+    ". .env*": deny
   task:
     "*": "allow"
 ---
@@ -126,14 +139,16 @@ Do not declare completion, hand off to the user, or commit on a
 
 ## Environment hygiene (critical)
 
-You may read `.env` files in project directories. These contain secrets that
-must **never leave the local machine**.
+Permission rules now block ALL agents from reading `.env` files. You do NOT
+have direct access to `.env` content.
 
 - Reference secrets only by **variable name** (e.g., `OPENCODE_LLAMA_BASEURL`).
 - **Never** write raw secret values in task return values, summaries, or
   messages returned to a parent agent.
 - When returning results to a cloud parent agent, replace values with
-  variable names: `OPENCODE_LLAMA_BASEURL is set` instead of the actual URL.
+  variable names: `baseURL is set via OPENCODE_LLAMA_BASEURL` instead of
+  the actual URL.
+- If you need to know a secret value, ask the user to provide it.
 
 ## Style
 
