@@ -45,32 +45,32 @@
 			"permission": {
 				"edit": "deny",
 				"bash": {
-					"*": "deny",
-					"gh repo view*": "allow",
-					"gh issue view*": "allow",
-					"gh issue list*": "allow",
-					"gh pr view*": "allow",
-					"gh pr list*": "allow",
-					"gh pr diff*": "allow",
-					"gh search*": "allow",
-					"gh release list*": "allow",
-					"gh release view*": "allow",
-					"gh run list*": "allow",
-					"gh run view*": "allow",
-					"gh workflow list*": "allow",
-					"gh workflow view*": "allow",
-					"gh *": "deny",
-					"git status*": "allow",
-					"git diff*": "allow",
-					"git log*": "allow",
-					"git show*": "allow",
-					"git show *env*": "deny",
-					"git diff *env*": "deny",
-					"ls": "allow",
-					"ls *": "allow",
-					"find": "allow",
-					"find *": "allow"
-				},
+				"*": "deny",
+				"gh *": "deny",
+				"gh repo view*": "allow",
+				"gh issue view*": "allow",
+				"gh issue list*": "allow",
+				"gh pr view*": "allow",
+				"gh pr list*": "allow",
+				"gh pr diff*": "allow",
+				"gh search*": "allow",
+				"gh release list*": "allow",
+				"gh release view*": "allow",
+				"gh run list*": "allow",
+				"gh run view*": "allow",
+				"gh workflow list*": "allow",
+				"gh workflow view*": "allow",
+				"git status*": "allow",
+				"git diff*": "allow",
+				"git log*": "allow",
+				"git show*": "allow",
+				"git show *env*": "deny",
+				"git diff *env*": "deny",
+				"ls": "allow",
+				"ls *": "allow",
+				"find": "allow",
+				"find *": "allow"
+			},
 				"task": {
 					"*": "allow"
 				}
@@ -80,23 +80,23 @@
 			"model": "llama.cpp/qwen3.6-27b-mtp",
 			"permission": {
 				"edit": "allow",
-				"bash": {
-					"*": "ask",
-					"gh repo view*": "allow",
-					"gh issue view*": "allow",
-					"gh issue list*": "allow",
-					"gh pr view*": "allow",
-					"gh pr list*": "allow",
-					"gh pr diff*": "allow",
-					"gh search*": "allow",
-					"gh release list*": "allow",
-					"gh release view*": "allow",
-					"gh run list*": "allow",
-					"gh run view*": "allow",
-					"gh workflow list*": "allow",
-					"gh workflow view*": "allow",
-					"gh *": "deny"
-				}
+		"bash": {
+				"gh *": "deny",
+				"*": "ask",
+				"gh repo view*": "allow",
+				"gh issue view*": "allow",
+				"gh issue list*": "allow",
+				"gh pr view*": "allow",
+				"gh pr list*": "allow",
+				"gh pr diff*": "allow",
+				"gh search*": "allow",
+				"gh release list*": "allow",
+				"gh release view*": "allow",
+				"gh run list*": "allow",
+				"gh run view*": "allow",
+				"gh workflow list*": "allow",
+				"gh workflow view*": "allow"
+			}
 			}
 		},
 		"general": {
@@ -105,6 +105,7 @@
 				"read": "allow",
 				"bash": {
 					"*": "deny",
+					"gh *": "deny",
 					"gh repo view*": "allow",
 					"gh issue view*": "allow",
 					"gh issue list*": "allow",
@@ -117,8 +118,7 @@
 					"gh run list*": "allow",
 					"gh run view*": "allow",
 					"gh workflow list*": "allow",
-					"gh workflow view*": "allow",
-					"gh *": "deny"
+					"gh workflow view*": "allow"
 				}
 			}
 		},
@@ -128,6 +128,7 @@
 				"read": "allow",
 				"bash": {
 					"*": "deny",
+					"gh *": "deny",
 					"gh repo view*": "allow",
 					"gh issue view*": "allow",
 					"gh issue list*": "allow",
@@ -140,8 +141,7 @@
 					"gh run list*": "allow",
 					"gh run view*": "allow",
 					"gh workflow list*": "allow",
-					"gh workflow view*": "allow",
-					"gh *": "deny"
+					"gh workflow view*": "allow"
 				}
 			}
 		},
@@ -151,6 +151,7 @@
 				"read": "allow",
 				"bash": {
 					"*": "deny",
+					"gh *": "deny",
 					"gh repo view*": "allow",
 					"gh issue view*": "allow",
 					"gh issue list*": "allow",
@@ -163,8 +164,7 @@
 					"gh run list*": "allow",
 					"gh run view*": "allow",
 					"gh workflow list*": "allow",
-					"gh workflow view*": "allow",
-					"gh *": "deny"
+					"gh workflow view*": "allow"
 				}
 			}
 		},
