@@ -1,4 +1,5 @@
 ---
+disable: true
 description: Planning agent that auto-delegates execution to @build.
 mode: primary
 model: opencode-go/kimi-k2.7-code
