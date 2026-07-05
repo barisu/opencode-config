@@ -2,8 +2,8 @@
 	"$schema": "https://opencode.ai/config.json",
 
 	// ---- Models & routing -------------------------------------------------
-	// 既定は OpenCode Go Qwen 3.7 Plus (深思考). small/title/summary 等の雑務は local llama-server.
-	"model": "opencode-go/qwen3.7-plus",
+	// 既定は OpenCode Go DeepSeek V4 Flash. small/title/summary 等の雑務は local llama-server.
+	"model": "opencode-go/deepseek-v4-flash",
 	"small_model": "local-llm",
 	// 会話開始時は orchestrator(司令塔)から入る.
 	"default_agent": "orchestrator",
@@ -198,7 +198,7 @@
 	},
 
 	// ---- Agents ------------------------------------------------------------
-	// orchestrator = OpenCode Go Qwen 3.7 Plus (司令塔, サブエージェントに委譲).
+	// orchestrator = OpenCode Go DeepSeek V4 Flash (司令塔, サブエージェントに委譲).
 	// build/explore 等 = dynamically-discovered local llama-server model.
 	// prompt は agents/*.md ファイルで上書き可能.
 	"agent": {
@@ -411,6 +411,7 @@
 					"explore": "allow",
 					"architect": "allow",
 					"reviewer": "allow",
+					"reviewer-first-pass": "allow",
 					"status": "allow"
 				},
 				"webfetch": "allow",
@@ -483,6 +484,30 @@
 		},
 		"summary": {
 			"model": "local-llm"
+		},
+		"reviewer-first-pass": {
+			"model": "opencode-go/deepseek-v4-flash",
+			"permission": {
+				"edit": "deny",
+				"bash": {
+					"*": "deny",
+					"git status*": "allow",
+					"git diff*": "allow",
+					"git log*": "allow",
+					"git show*": "allow",
+					"git show *env*": "deny",
+					"git diff *env*": "deny",
+					"ls": "allow",
+					"ls *": "allow",
+					"find": "allow",
+					"find *": "allow"
+				},
+				"websearch": "deny",
+				"webfetch": "deny",
+				"task": {
+					"*": "deny"
+				}
+			}
 		}
 	},
 

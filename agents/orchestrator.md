@@ -1,7 +1,7 @@
 ---
 description: Orchestrator agent that commands and coordinates subagents. Delegates all implementation work to @build and specialized work to @explore, @architect, @reviewer, and @status.
 mode: primary
-model: opencode-go/qwen3.7-plus
+model: opencode-go/deepseek-v4-flash
 temperature: 0.2
 permission:
   edit: deny
@@ -37,6 +37,7 @@ permission:
     "explore": allow
     "architect": allow
     "reviewer": allow
+    "reviewer-first-pass": allow
     "status": allow
 ---
 

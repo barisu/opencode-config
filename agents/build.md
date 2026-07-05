@@ -99,24 +99,37 @@ Receive the architect's design brief (which includes a **Dependencies &
 versions** section), then continue implementing. Do NOT proceed on guesses
 about system-shape decisions or outdated API shapes.
 
-## Review flow (mandatory before finishing)
+## Review flow (mandatory before finishing — two-stage)
 
-Before declaring a task done, you MUST request a review from `@reviewer`
-via the Task tool. Hand the reviewer: the architect's design brief and a
-short summary of what you changed (or let it read the `git diff` itself).
+Before declaring a task done, you MUST pass through a **two-stage review
+pipeline**:
 
-Then iterate:
+### Stage 1: Initial review (`@reviewer-first-pass`)
 
-1. If `@reviewer` returns `CHANGES_REQUESTED`, fix **every** blocker and
-   major finding (nits may be deferred with a one-line reason), then call
-   `@reviewer` again for a fresh cycle.
-2. If a finding reveals the *design itself* is flawed (not just your
-   implementation of it), stop, re-engage `@architect` with the reviewer's
-  note, and resume from the new brief.
-3. Only stop when `@reviewer` returns `APPROVED`.
+1. Call `@reviewer-first-pass` (DeepSeek V4 Flash) via the Task tool.
+   Hand it: the architect's design brief and a short summary of what you
+   changed (or let it read the `git diff` itself).
+2. If it returns `CHANGES_REQUESTED`, fix **every** blocker and major
+   finding (nits may be deferred with a one-line reason), then call
+   `@reviewer-first-pass` again until it returns `APPROVED`.
+
+### Stage 2: Final review (`@reviewer`)
+
+3. Once `@reviewer-first-pass` returns `APPROVED`, call `@reviewer`
+   (DeepSeek V4 Pro) via the Task tool with the same materials.
+4. If `@reviewer` returns `CHANGES_REQUESTED`, fix **every** blocker and
+   major finding, then call `@reviewer` again for a fresh cycle.
+5. Only stop when `@reviewer` returns `APPROVED`.
+
+### Design flaws
+
+If any review finding reveals the *design itself* is flawed (not just
+your implementation of it), stop, re-engage `@architect` with the
+reviewer's note, and resume from the new brief.
 
 Do not declare completion, hand off to the user, or commit on a
-`CHANGES_REQUESTED` verdict. Skipping the review step is a failure mode.
+`CHANGES_REQUESTED` verdict. Skipping either review stage is a failure
+mode.
 
 ## When to defer to other subagents
 
@@ -124,7 +137,7 @@ Do not declare completion, hand off to the user, or commit on a
   Prefer this over ad-hoc `rg` chains.
 - `@general` — for parallel multi-step work you want to offload.
 
-## Verification (mandatory before calling @reviewer)
+## Verification (mandatory before calling @reviewer-first-pass)
 
 1. Check for `AGENTS.md` in the project root. If it exists, read it and use
    the exact lint / typecheck / test commands listed there.
