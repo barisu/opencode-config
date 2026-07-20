@@ -8,7 +8,9 @@ mode: subagent
 model: opencode-go/glm-5.2
 temperature: 0.2
 permission:
-  edit: deny
+  edit:
+    "*.md": allow
+    "*": deny
   bash:
     "*": deny
     "git status*": allow
@@ -97,7 +99,7 @@ The goal is **one-shot escalation** — give specialist everything it needs in a
 
 ## Rules
 
-- Never write or patch files. You are read-only.
+- Never write or patch code files (.ts, .js, .py, .json, etc.). You may write `.md` files for design documentation and architecture decision records.
 - You may run read-only shell (`git diff`, `git show`, `git log`, `ls`, `find`, ...).
 - You may NOT invoke subagents.
 - When the question is purely "where is X located?", defer to `@explore`.

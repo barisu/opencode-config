@@ -4,7 +4,7 @@
 	// ---- Models & routing -------------------------------------------------
 	// 既定は OpenCode Go DeepSeek V4 Flash. small/title/summary 等の雑務は local llama-server.
 	"model": "opencode-go/deepseek-v4-flash",
-	"small_model": "local-llm",
+	"small_model": "llama.cpp/local-llm",
 	// 会話開始時は orchestrator(司令塔)から入る.
 	"default_agent": "orchestrator",
 
@@ -244,7 +244,7 @@
 			}
 		},
 		"build": {
-			"model": "local-llm",
+			"model": "llama.cpp/local-llm",
 			"permission": {
 				"edit": "allow",
 				"read": {
@@ -419,7 +419,7 @@
 			}
 		},
 		"general": {
-			"model": "local-llm",
+			"model": "llama.cpp/local-llm",
 			"permission": {
 				"edit": "deny",
 				"read": {
@@ -448,7 +448,7 @@
 			}
 		},
 		"explore": {
-			"model": "local-llm",
+			"model": "llama.cpp/local-llm",
 			"permission": {
 				"edit": "deny",
 				"read": {
@@ -477,13 +477,13 @@
 			}
 		},
 		"compaction": {
-			"model": "local-llm"
+			"model": "llama.cpp/local-llm"
 		},
 		"title": {
-			"model": "local-llm"
+			"model": "llama.cpp/local-llm"
 		},
 		"summary": {
-			"model": "local-llm"
+			"model": "llama.cpp/local-llm"
 		},
 		"reviewer-first-pass": {
 			"model": "opencode-go/deepseek-v4-flash",
@@ -508,6 +508,9 @@
 					"*": "deny"
 				}
 			}
+		},
+		"local-reader": {
+			"model": "llama.cpp/local-llm"
 		}
 	},
 

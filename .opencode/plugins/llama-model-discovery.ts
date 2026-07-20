@@ -109,7 +109,7 @@ const llamaModelDiscoveryPlugin: Plugin = async () => {
         ;(llamaConfig as { models?: Record<string, unknown> }).models = existing
 
         // Update small_model if it currently points at a llama.cpp model.
-        if (typeof cfg.small_model === "string" && cfg.small_model.startsWith("llama.cpp/")) {
+        if (typeof cfg.small_model === "string" && (cfg.small_model.startsWith("llama.cpp/") || cfg.small_model === "local-llm")) {
           cfg.small_model = `llama.cpp/${firstId}`
         }
 
@@ -123,7 +123,7 @@ const llamaModelDiscoveryPlugin: Plugin = async () => {
               typeof agentCfg === "object" &&
               "model" in (agentCfg as Record<string, unknown>) &&
               typeof (agentCfg as { model?: unknown }).model === "string" &&
-              (agentCfg as { model: string }).model.startsWith("llama.cpp/")
+              ((agentCfg as { model: string }).model.startsWith("llama.cpp/") || (agentCfg as { model: string }).model === "local-llm")
             ) {
               ;(agentCfg as { model: string }).model = `llama.cpp/${firstId}`
             }
