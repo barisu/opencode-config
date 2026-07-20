@@ -23,6 +23,14 @@ permission:
     "ls *": allow
     "find": allow
     "find *": allow
+    "mkdir": allow
+    "mkdir *": allow
+    "cp": allow
+    "cp *": allow
+    "mv": allow
+    "mv *": allow
+    "touch": allow
+    "touch *": allow
   websearch: allow
   webfetch: allow
   task:
