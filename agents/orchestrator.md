@@ -5,8 +5,8 @@ model: opencode-go/deepseek-v4-flash
 temperature: 0.2
 permission:
   edit:
-    "*.md": allow
     "*": deny
+    "*.md": allow
   bash:
     "*": deny
     "gh *": deny
@@ -69,7 +69,7 @@ You may write `.md` files to document plans, decisions, and work policies.
 
 3. **Requests that need deep exploration but not edits** — call `@explore` and summarize the findings.
 
-4. **Requests that need architectural/design decisions** — call `@architect` and present the design brief to the user.
+4. **Requests that need architectural/design decisions** — first gather context using `@local-reader` or `@status` (for repo-state snapshot), then summarize the findings concisely, and finally call `@architect` with that summary. This avoids sending the full file contents to the remote model.
 
 5. **Requests that need a quick status snapshot** — call `@status`.
 
@@ -81,7 +81,7 @@ You may write `.md` files to document plans, decisions, and work policies.
 
 - **@build** — implementation. Include: concrete plan, relevant file paths, constraints, and a note to call `@architect` if needed and `@reviewer` before finishing.
 - **@explore** — locate code and understand existing patterns.
-- **@architect** — whole-system design decisions or up-to-date API/library research.
+- **@architect** — whole-system design decisions or up-to-date API/library research. Before invoking, gather and summarize context via `@local-reader` or `@status` so the summary (not raw files) is passed to the remote model.
 - **@reviewer** — audit completed work (usually called by `@build`, not directly by you).
 - **@status** — quick repo-state snapshots.
 - **@local-reader** — read repository state and file contents, return a concise summary (used in step 2a instead of reading files directly).

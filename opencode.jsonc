@@ -29,7 +29,8 @@
 			"npm": "@ai-sdk/openai-compatible",
 			"name": "OpenRouter",
 			"options": {
-				"baseURL": "https://openrouter.ai/api/v1"
+				"baseURL": "https://openrouter.ai/api/v1",
+				"apiKey": "{env:OPENROUTER_API_KEY}"
 			},
 			"models": {
 				"~anthropic/claude-fable-5": {
@@ -53,6 +54,10 @@
 			}
 		}
 	},
+
+	// ---- Subagent depth ----------------------------------------------------
+	// アーキテクトが @status を呼べるように depth 2 まで許可.
+	"subagent_depth": 2,
 
 	// ---- Plugins ------------------------------------------------------------
 	"plugin": [
@@ -212,8 +217,12 @@
 	// prompt は agents/*.md ファイルで上書き可能.
 	"agent": {
 		"architect": {
-			"model": "openrouter/openai/gpt-5.6-sol",
+			"model": "opencode-go/kimi-k3",
 			"permission": {
+				"edit": {
+					"*": "deny",
+					"*.md": "allow"
+				},
 				"task": {
 					"*": "deny"
 				}
@@ -494,5 +503,5 @@
 	// .env の生値をクラウドに流出させない規約（local エージェント向け）.
 	"instructions": [
 		"instructions/env-hygiene.md"
-	]
+	],
 }

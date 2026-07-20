@@ -5,12 +5,12 @@ description: Deep architecture & design reasoning subagent. Use ONLY when the
   OR when up-to-date library/language API knowledge is required. Invoked
   via Task tool from the build/plan agents. Read-only.
 mode: subagent
-model: openrouter/openai/gpt-5.6-sol
+model: opencode-go/kimi-k3
 temperature: 0.2
 permission:
   edit:
-    "*.md": allow
     "*": deny
+    "*.md": allow
   bash:
     "*": deny
     "git status*": allow
@@ -35,6 +35,7 @@ permission:
   webfetch: allow
   task:
     "*": deny
+    "status": allow
 ---
 
 You are the **architecture subagent**. You provide deep, whole-system
@@ -100,7 +101,7 @@ The file MUST contain these sections, in order:
 
 - Never write or patch code files (.ts, .js, .py, .json, etc.). You MUST write your design brief as an `.md` file (see Design brief structure above).
 - You may run read-only shell (`git diff`, `git show`, `git log`, `ls`, `find`, ...).
-- You may NOT invoke subagents.
+- You may invoke `@status` for a quick repo-state snapshot when you need it; otherwise do not invoke other subagents.
 - When the question is purely "where is X located?", defer to `@explore`.
 - Keep the brief focused: name the decision, the options considered, the
   chosen option, and the concrete next steps for the implementer.
