@@ -40,6 +40,15 @@
 					},
 					"tool_call": true,
 					"attachment": true
+				},
+				"openai/gpt-5.6-sol": {
+					"name": "OpenAI GPT 5.6 Sol (OpenRouter)",
+					"limit": {
+						"context": 1050000,
+						"output": 65536
+					},
+					"tool_call": true,
+					"attachment": true
 				}
 			}
 		}
@@ -203,41 +212,8 @@
 	// prompt は agents/*.md ファイルで上書き可能.
 	"agent": {
 		"architect": {
-			"model": "opencode-go/glm-5.2",
+			"model": "openrouter/openai/gpt-5.6-sol",
 			"permission": {
-				"task": {
-					"*": "deny",
-					"architect-specialist": "allow"
-				}
-			}
-		},
-		"architect-specialist": {
-			"model": "openrouter/~anthropic/claude-fable-5",
-			"permission": {
-				"edit": "deny",
-				"read": {
-					"": "allow",
-					".env": "deny",
-					".env.*": "deny",
-					".env.example": "allow"
-				},
-				"bash": {
-					"*": "deny",
-					"gh *": "deny",
-					"gh repo view*": "allow",
-					"gh issue view*": "allow",
-					"gh issue list*": "allow",
-					"gh pr view*": "allow",
-					"gh pr list*": "allow",
-					"gh pr diff*": "allow",
-					"gh search*": "allow",
-					"gh release list*": "allow",
-					"gh release view*": "allow",
-					"gh run list*": "allow",
-					"gh run view*": "allow",
-					"gh workflow list*": "allow",
-					"gh workflow view*": "allow"
-				},
 				"task": {
 					"*": "deny"
 				}
