@@ -5,59 +5,159 @@ model: llama.cpp/qwen3.6-27b-mtp
 temperature: 0.3
 steps: 80
 permission:
+  # edit/build は明示的に許可（トップレベルは deny）
   edit: allow
-  read:
-    "": allow
-    ".env": deny
-    ".env.": deny
-    ".env.example": allow
+  # bash: 包括的なツールアクセス + .env 保護
   bash:
-    "gh *": deny
+    # デフォルトは ask（未知のコマンドは確認）
     "*": ask
-    "git status*": "allow"
-    "git diff*": "allow"
-    "git log*": "allow"
-    "ls *": "allow"
-    "cat *": "allow"
+    # gh はデフォルトで拒否し、読み取り専用コマンドのみ許可
+    "gh *": deny
+    # ---- .env 露出防止 ----
     "cat .env*": deny
     "cat *.env*": deny
     "cat */.env*": deny
     "cat * .env*": deny
-    "rg *": "allow"
-    "grep *": "allow"
-    "find *": "allow"
-    "npm run *": "allow"
-    "npx *": "allow"
-    "bun *": "allow"
-    "tsc *": "allow"
-    "eslint *": "allow"
-    "prettier *": "allow"
-    "ruff *": "allow"
-    "go build*": "allow"
-    "go test*": "allow"
-    "go vet*": "allow"
-    "npm test*": "allow"
-    "pytest*": "allow"
-    "gh repo view*": "allow"
-    "gh issue view*": "allow"
-    "gh issue list*": "allow"
-    "gh pr view*": "allow"
-    "gh pr list*": "allow"
-    "gh pr diff*": "allow"
-    "gh search*": "allow"
-    "gh release list*": "allow"
-    "gh release view*": "allow"
-    "gh run list*": "allow"
-    "gh run view*": "allow"
-    "gh workflow list*": "allow"
-    "gh workflow view*": "allow"
     "less .env*": deny
     "head .env*": deny
     "tail .env*": deny
     "source .env*": deny
     ". .env*": deny
+    "git show *env*": deny
+    "git diff *env*": deny
+    # ---- パッケージマネージャ ----
+    "node *": allow
+    "node": allow
+    "npm *": allow
+    "npm": allow
+    "npx *": allow
+    "npx": allow
+    "bun *": allow
+    "bun": allow
+    "pnpm *": allow
+    "pnpm": allow
+    "yarn *": allow
+    "yarn": allow
+    "deno *": allow
+    "deno": allow
+    "uv *": allow
+    "uv": allow
+    "pip3 *": allow
+    "pip3": allow
+    "pip *": allow
+    "pip": allow
+    "poetry *": allow
+    "poetry": allow
+    # ---- 言語ランタイム ----
+    "python3 *": allow
+    "python3": allow
+    "python *": allow
+    "python": allow
+    # ---- Git コマンド ----
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git show*": allow
+    # ---- ファイル操作 / 探索 ----
+    "ls *": allow
+    "find *": allow
+    "mkdir *": allow
+    "cp *": allow
+    "mv *": allow
+    "touch *": allow
+    "rm *": ask
+    # ---- ファイル読み取り（.env 以外） ----
+    "cat *": allow
+    # ---- 検索（bash 経由） ----
+    "rg *": allow
+    "grep *": allow
+    # ---- TypeScript / Web ツールチェーン ----
+    "tsc *": allow
+    "tsc": allow
+    "tsx *": allow
+    "tsx": allow
+    "ts-node *": allow
+    "ts-node": allow
+    "vitest *": allow
+    "vitest": allow
+    "jest *": allow
+    "jest": allow
+    "eslint *": allow
+    "eslint": allow
+    "prettier *": allow
+    "prettier": allow
+    "next *": allow
+    "next": allow
+    "vite *": allow
+    "vite": allow
+    "turbo *": allow
+    "turbo": allow
+    # ---- Go ツールチェーン ----
+    "go build*": allow
+    "go test*": allow
+    "go vet*": allow
+    # ---- Python ツールチェーン ----
+    "pytest *": allow
+    "pytest": allow
+    "ruff *": allow
+    "ruff": allow
+    "mypy *": allow
+    "mypy": allow
+    "jupyter *": allow
+    "jupyter": allow
+    # ---- GitHub CLI（読み取り専用） ----
+    "gh repo view*": allow
+    "gh issue view*": allow
+    "gh issue list*": allow
+    "gh pr view*": allow
+    "gh pr list*": allow
+    "gh pr diff*": allow
+    "gh search*": allow
+    "gh release list*": allow
+    "gh release view*": allow
+    "gh run list*": allow
+    "gh run view*": allow
+    "gh workflow list*": allow
+    "gh workflow view*": allow
+    # ---- 汎用ユーティリティ ----
+    "curl *": allow
+    "curl": allow
+    "wget *": allow
+    "wget": allow
+    "jq *": allow
+    "jq": allow
+    "make *": allow
+    "make": allow
+    "docker *": allow
+    "docker": allow
+    "docker-compose *": allow
+    "docker-compose": allow
+    "which *": allow
+    "which": allow
+    "env": allow
+    "printenv": allow
+    "diff *": allow
+    "diff": allow
+    "wc *": allow
+    "wc": allow
+    "sort *": allow
+    "sort": allow
+    "tar *": allow
+    "tar": allow
+    "zip *": allow
+    "zip": allow
+    "unzip *": allow
+    "unzip": allow
+  # task: orchestrator 経由で呼ぶ特定サブエージェントのみ許可
   task:
-    "*": "allow"
+    "*": deny
+    "explore": allow
+    "architect": allow
+    "reviewer": allow
+    "reviewer-first-pass": allow
+    "status": allow
+  webfetch: allow
+  websearch: allow
 ---
 
 You are the **build agent**. You turn a design into working code on top of
