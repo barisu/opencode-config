@@ -50,6 +50,15 @@
 					},
 					"tool_call": true,
 					"attachment": true
+				},
+				"openai/gpt-5.6-terra": {
+					"name": "OpenAI GPT 5.6 Terra (OpenRouter)",
+					"limit": {
+						"context": 1050000,
+						"output": 65536
+					},
+					"tool_call": true,
+					"attachment": true
 				}
 			}
 		}
@@ -213,14 +222,14 @@
 
 	// ---- Agents ------------------------------------------------------------
 	// orchestrator = OpenAI GPT-5.6 Terra via ChatGPT Plus/Pro authentication (司令塔, サブエージェントに委譲).
-	// build/explore 等 = dynamically-discovered local llama-server model.
+	// build/local-reader = OpenAI GPT-5.6 Luna via OpenCode Go.
 	// prompt は agents/*.md ファイルで上書き可能.
 	"agent": {
 		"architect": {
 			"model": "openai/gpt-5.6-sol"
 		},
-	"build": {
-			"model": "llama.cpp/local-llm"
+		"build": {
+			"model": "opencode-go/gpt-5.6-luna"
 		},
 		"general": {
 			"model": "llama.cpp/local-llm",
@@ -248,10 +257,21 @@
 					"gh run view*": "allow",
 					"gh workflow list*": "allow",
 					"gh workflow view*": "allow"
+				},
+				"task": {
+					"*": "deny"
 				}
 			}
 		},
 		"explore": {
+			"disable": true,
+			"permission": {
+				"task": {
+					"*": "deny"
+				}
+			}
+		},
+		"local-reader": {
 			"model": "llama.cpp/local-llm",
 			"permission": {
 				"edit": "deny",
@@ -263,20 +283,21 @@
 				},
 				"bash": {
 					"*": "deny",
-					"gh *": "deny",
-					"gh repo view*": "allow",
-					"gh issue view*": "allow",
-					"gh issue list*": "allow",
-					"gh pr view*": "allow",
-					"gh pr list*": "allow",
-					"gh pr diff*": "allow",
-					"gh search*": "allow",
-					"gh release list*": "allow",
-					"gh release view*": "allow",
-					"gh run list*": "allow",
-					"gh run view*": "allow",
-					"gh workflow list*": "allow",
-					"gh workflow view*": "allow"
+					"git status*": "allow",
+					"git diff*": "allow",
+					"git diff *env*": "deny",
+					"git log*": "allow",
+					"git log *env*": "deny",
+					"git show*": "allow",
+					"git show *env*": "deny",
+					"git branch*": "allow",
+					"ls": "allow",
+					"ls *": "allow",
+					"find": "allow",
+					"find *": "allow"
+				},
+				"task": {
+					"*": "deny"
 				}
 			}
 		},
@@ -291,9 +312,6 @@
 		},
 		"reviewer-first-pass": {
 			"model": "opencode-go/deepseek-v4-flash"
-		},
-		"local-reader": {
-			"model": "llama.cpp/local-llm"
 		}
 	},
 

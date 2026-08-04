@@ -32,6 +32,30 @@ Your output becomes the input context of calling (parent) agents. A cloud-based
 parent agent receives everything you return — secrets in your return value
 will be transmitted to the cloud provider.
 
+## Python environment management
+
+Prefer `uv` for Python environment and dependency management. `uv` is a
+fast, single-binary drop-in for `python -m venv`, `pip`, and `pip-tools`
+and handles lockfile-based reproducible installs.
+
+- **Prefer uv for new environments**: Use `uv venv` to create a virtual
+  environment and `uv sync` / `uv pip install` for dependency management.
+- **Respect existing project tooling**: If the repository already uses
+  Poetry, `pip-tools`, `pipenv`, Conda, or another workflow (evidenced by
+  `pyproject.toml` settings, `poetry.lock`, `Pipfile.lock`, `requirements.txt`,
+  `Makefile` instructions, or CI configuration), follow that workflow. Do
+  **not** swap in uv over an established toolchain.
+- **Lockfile-first**: When a `uv.lock` exists alongside `pyproject.toml`,
+  run `uv sync` rather than `pip install -r requirements.txt` to honour
+  exact resolved versions.
+- **Do not expose or load `.env` files**: The `.env` handling rules above
+  (critical) also apply to Python projects — never read `.env` contents,
+  never pass them to parent agents, and never commit `.env` files.
+- **`uv run` for reproducibility**: When running a script, test, or tool
+  that has project-specific dependencies, prefer `uv run <command>` so
+  it executes inside the resolved environment without requiring a
+  pre-activated venv.
+
 ## GitHub CLI (`gh`) usage
 
 When you need to interact with GitHub (repositories, issues, pull requests,
