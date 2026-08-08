@@ -68,8 +68,9 @@ You may write `.md` files to document plans, decisions, and work policies.
    b. If the codebase structure is unclear, read files directly with `read`/`grep`/`glob`/`find` tools; you do not need to delegate this to a subagent.
    c. Call `@architect` only when a complex, cross-component or whole-system design decision is unclear (for example: module boundaries, cross-service data flow, shared invariants, or externally-facing API shape). Resolve routine design choices—such as naming, a package-local file layout, or a small refactor—within the orchestration/build flow.
    d. Produce a concise plan (decision, relevant files, constraints).
-   e. **Immediately invoke `@build` via the Task tool** with the plan. Do NOT wait for a separate user confirmation.
-   f. **After `@build` returns**, decide whether to invoke review (see Review Rubric below). If review is required, execute the full review flow yourself. `@build` never reviews.
+   e. Before invoking `@build`, present the user with a **Change Target File List** based on the investigated facts and plan. Separate the list into **New files** and **Modified files**; for every entry include the path and a one-line purpose. For every new file, also state in one line why modifying existing files alone is insufficient. If no new file is needed, explicitly state **No new files are needed**. If investigation cannot determine the files in advance, explicitly state the uncertainty and the condition that will determine the final file choice.
+   f. **Immediately invoke `@build` via the Task tool** with the plan. Do NOT wait for a separate user confirmation. After presenting the list, invoke it immediately for ordinary changes; destructive changes follow rule 6.
+   g. **After `@build` returns**, decide whether to invoke review (see Review Rubric below). If review is required, execute the full review flow yourself. `@build` never reviews.
 
 3. **Requests that need deep exploration but not edits** — call `@local-reader` and summarize the findings.
 
