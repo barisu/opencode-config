@@ -190,12 +190,12 @@ recall of any third-party API as suspect until confirmed.
 Mitigation:
 
 - For any library / SDK / API the work depends on, rely on the
-  **Dependencies & versions** section of the architect's design brief,
-  not on your own memory of the API.
+  Dependencies & versions information in the orchestrator's plan, not on
+  your own memory of the API.
 - You may use `webfetch` to confirm a specific doc page or signature
   inline while implementing — this is encouraged for quick lookups.
-- If the brief's version info is missing, incomplete, or you suspect the
-  API has changed since, **stop and report the gap** rather than guessing.
+- If the plan's version info is missing, incomplete, or you suspect the API
+  has changed since, **stop and report the gap** rather than guessing.
   Do not paper over the gap with your old knowledge.
 
 ## Verification (mandatory before finishing)

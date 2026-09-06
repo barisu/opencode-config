@@ -67,5 +67,5 @@ Produce a concise plan containing:
 - Any constraints or conventions from the codebase.
 - Any ambiguities or risks that the orchestrator should resolve.
 
-Do NOT invoke `@build`, `@architect`, or any other agent. The orchestrator
+Do NOT invoke `@build` or any other agent. The orchestrator
 owns all subagent delegation and progression.

@@ -65,7 +65,7 @@
 	},
 
 	// ---- Subagent depth ----------------------------------------------------
-	// アーキテクトが @status を呼べるように depth 2 まで許可.
+	// サブエージェントが @status を呼べるように depth 2 まで許可.
 	"subagent_depth": 2,
 
 	// ---- Plugins ------------------------------------------------------------
@@ -225,9 +225,6 @@
 	// build/local-reader = OpenAI GPT-5.6 Luna via OpenCode Go.
 	// prompt は agents/*.md ファイルで上書き可能.
 	"agent": {
-		"architect": {
-			"model": "openai/gpt-5.6-sol"
-		},
 		"build": {
 			"model": "opencode-go/gpt-5.6-luna"
 		},
@@ -310,9 +307,6 @@
 		"summary": {
 			"model": "llama.cpp/local-llm"
 		},
-		"reviewer-first-pass": {
-			"model": "opencode-go/deepseek-v4-flash"
-		}
 	},
 
 	// ---- Instructions ------------------------------------------------------
