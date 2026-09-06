@@ -269,7 +269,7 @@
 			}
 		},
 		"local-reader": {
-			"model": "llama.cpp/local-llm",
+			"model": "opencode-go/gpt-5.6-luna",
 			"permission": {
 				"edit": "deny",
 				"read": {

@@ -1,7 +1,7 @@
 ---
 description: Local repository-reading agent. Locate code, understand repository structure, and gather file content for other agents. Read-only; no task delegation; no web tools.
 mode: subagent
-model: llama.cpp/local-llm
+model: opencode-go/gpt-5.6-luna
 temperature: 0
 steps: 15
 permission:
