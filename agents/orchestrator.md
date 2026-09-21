@@ -1,7 +1,7 @@
 ---
 description: Orchestrator agent that commands and coordinates subagents. Owns design and review while delegating implementation work to @build.
 mode: primary
-model: openrouter/openai/gpt-5.6-sol
+model: openai/gpt-5.6-sol
 temperature: 0.2
 permission:
   edit:
