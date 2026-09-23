@@ -1,7 +1,7 @@
 ---
 description: Implementation agent that executes a plan with full tool access.
 mode: all
-model: opencode-go/gpt-5.6-luna
+model: openai/gpt-6-luna
 temperature: 0.3
 steps: 80
 permission:

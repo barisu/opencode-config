@@ -42,8 +42,8 @@
 					"tool_call": true,
 					"attachment": true
 				},
-				"openai/gpt-5.6-sol": {
-					"name": "OpenAI GPT 5.6 Sol (OpenRouter)",
+				"openai/gpt-6-sol": {
+					"name": "OpenAI GPT 6 Sol",
 					"limit": {
 						"context": 1000000,
 						"output": 65536
@@ -227,11 +227,10 @@
 
 	// ---- Agents ------------------------------------------------------------
 	// orchestrator = OpenAI GPT-5.6 Sol via OpenRouter (司令塔, サブエージェントに委譲).
-	// build/local-reader = OpenAI GPT-5.6 Luna via OpenCode Go.
 	// prompt は agents/*.md ファイルで上書き可能.
 	"agent": {
 		"build": {
-			"model": "opencode-go/gpt-5.6-luna"
+			"model": "openai/gpt-6-luna"
 		},
 		"general": {
 			"model": "llama.cpp/local-llm",
@@ -274,7 +273,7 @@
 			}
 		},
 		"local-reader": {
-			"model": "opencode-go/gpt-5.6-luna",
+			"model": "openai/gpt-6-luna",
 			"permission": {
 				"edit": "deny",
 				"read": {
