@@ -1,13 +1,11 @@
 {
 	"$schema": "https://opencode.ai/config.json",
-
 	// ---- Models & routing -------------------------------------------------
 	// 既定は OpenCode Go DeepSeek V4 Flash. small/title/summary 等の雑務は local llama-server.
 	"model": "opencode-go/deepseek-v4-flash",
 	"small_model": "llama.cpp/local-llm",
 	// デフォルトで直接 build エージェント（実装・検証）を起動
 	"default_agent": "build",
-
 	"mcp": {
 		"tavily": {
 			"type": "local",
@@ -16,7 +14,6 @@
 			]
 		}
 	},
-
 	"provider": {
 		"llama.cpp": {
 			"npm": "@ai-sdk/openai-compatible",
@@ -42,8 +39,8 @@
 					"tool_call": true,
 					"attachment": true
 				},
-				"openai/gpt-6-sol": {
-					"name": "OpenAI GPT 6 Sol",
+				"openai/gpt-6.1-sol": {
+					"name": "OpenAI GPT 6.1 Sol",
 					"limit": {
 						"context": 1000000,
 						"output": 65536
@@ -63,17 +60,14 @@
 			}
 		}
 	},
-
 	"compaction": {
 		"auto": false,
 		"reserved": 65536
 	},
-
 	// ---- Plugins ------------------------------------------------------------
 	"plugin": [
 		"./.opencode/plugins/llama-model-discovery.ts"
 	],
-
 	// ---- Permission (top-level default) ------------------------------------
 	// .env files are blocked everywhere except .env.example.
 	"permission": {
@@ -220,7 +214,6 @@
 		"websearch": "allow",
 		"skill": "allow"
 	},
-
 	// ---- Agents ------------------------------------------------------------
 	"agent": {
 		"build": {
@@ -269,7 +262,6 @@
 			"model": "llama.cpp/local-llm"
 		}
 	},
-
 	// ---- Instructions ------------------------------------------------------
 	// .env の生値をクラウドに流出させない規約（local エージェント向け）.
 	"instructions": [

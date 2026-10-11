@@ -1,7 +1,7 @@
 ---
 description: Autonomous coding agent that investigates, designs, implements, and verifies changes.
 mode: primary
-model: openai/gpt-6-luna
+model: openai/gpt-6.1-sol
 temperature: 0.3
 steps: 80
 permission:
