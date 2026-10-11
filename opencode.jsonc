@@ -5,8 +5,8 @@
 	// 既定は OpenCode Go DeepSeek V4 Flash. small/title/summary 等の雑務は local llama-server.
 	"model": "opencode-go/deepseek-v4-flash",
 	"small_model": "llama.cpp/local-llm",
-	// 会話開始時は orchestrator(司令塔)から入る.
-	"default_agent": "orchestrator",
+	// デフォルトで直接 build エージェント（実装・検証）を起動
+	"default_agent": "build",
 
 	"mcp": {
 		"tavily": {
@@ -63,10 +63,6 @@
 			}
 		}
 	},
-
-	// ---- Subagent depth ----------------------------------------------------
-	// サブエージェントが @status を呼べるように depth 2 まで許可.
-	"subagent_depth": 2,
 
 	"compaction": {
 		"auto": false,
@@ -218,16 +214,14 @@
 			"unzip": "allow",
 			"unzip *": "allow"
 		},
-		"edit": "deny",
-		"task": "allow",
+		"edit": "allow",
+		"task": "deny",
 		"webfetch": "allow",
 		"websearch": "allow",
 		"skill": "allow"
 	},
 
 	// ---- Agents ------------------------------------------------------------
-	// orchestrator = OpenAI GPT-5.6 Sol via OpenRouter (司令塔, サブエージェントに委譲).
-	// prompt は agents/*.md ファイルで上書き可能.
 	"agent": {
 		"build": {
 			"model": "openai/gpt-6-luna"
@@ -264,44 +258,6 @@
 				}
 			}
 		},
-		"explore": {
-			"disable": true,
-			"permission": {
-				"task": {
-					"*": "deny"
-				}
-			}
-		},
-		"local-reader": {
-			"model": "openai/gpt-6-luna",
-			"permission": {
-				"edit": "deny",
-				"read": {
-					"": "allow",
-					".env": "deny",
-					".env.*": "deny",
-					".env.example": "allow"
-				},
-				"bash": {
-					"*": "deny",
-					"git status*": "allow",
-					"git diff*": "allow",
-					"git diff *env*": "deny",
-					"git log*": "allow",
-					"git log *env*": "deny",
-					"git show*": "allow",
-					"git show *env*": "deny",
-					"git branch*": "allow",
-					"ls": "allow",
-					"ls *": "allow",
-					"find": "allow",
-					"find *": "allow"
-				},
-				"task": {
-					"*": "deny"
-				}
-			}
-		},
 		"compaction": {
 			"model": "openai/gpt-5.6-sol",
 			"auto": false
@@ -311,12 +267,12 @@
 		},
 		"summary": {
 			"model": "llama.cpp/local-llm"
-		},
+		}
 	},
 
 	// ---- Instructions ------------------------------------------------------
 	// .env の生値をクラウドに流出させない規約（local エージェント向け）.
 	"instructions": [
 		"instructions/env-hygiene.md"
-	],
+	]
 }
